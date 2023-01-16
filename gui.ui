@@ -7,7 +7,6 @@
       <object class="tk.Entry" id="entry">
         <property name="font">{Terminus} 16 {bold}</property>
         <property name="validate">none</property>
-        <bind sequence="&lt;Return&gt;" handler="callback" add="" />
         <layout manager="pack">
           <property name="fill">x</property>
           <property name="padx">3</property>
@@ -22,7 +21,8 @@
         <property name="height">10</property>
         <property name="width">10</property>
         <layout manager="pack">
-          <property name="fill">x</property>
+          <property name="expand">true</property>
+          <property name="fill">both</property>
           <property name="propagate">True</property>
           <property name="side">top</property>
         </layout>
@@ -32,8 +32,6 @@
             <property name="justify">center</property>
             <property name="takefocus">true</property>
             <property name="width">33</property>
-            <bind sequence="&lt;Enter&gt;" handler="bla" add="True" />
-            <bind sequence="&lt;Key&gt;" handler="klavesnice" add="" />
             <layout manager="pack">
               <property name="expand">true</property>
               <property name="fill">both</property>
@@ -48,14 +46,29 @@
             <property name="relief">sunken</property>
             <property name="width">2</property>
             <layout manager="pack">
+              <property name="fill">y</property>
               <property name="propagate">True</property>
               <property name="side">left</property>
             </layout>
             <child>
               <object class="tk.Button" id="btnUp">
+                <property name="command" type="command" cbtype="simple">up</property>
                 <property name="font">TkDefaultFont</property>
                 <property name="takefocus">true</property>
                 <property name="text" translatable="yes">Up</property>
+                <property name="width">5</property>
+                <layout manager="pack">
+                  <property name="anchor">n</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Button" id="btnDown">
+                <property name="command" type="command" cbtype="simple">down</property>
+                <property name="takefocus">true</property>
+                <property name="text" translatable="yes">Down</property>
                 <property name="width">5</property>
                 <layout manager="pack">
                   <property name="propagate">True</property>
@@ -64,13 +77,27 @@
               </object>
             </child>
             <child>
-              <object class="tk.Button" id="btnDown">
-                <property name="takefocus">true</property>
-                <property name="text" translatable="yes">Down</property>
+              <object class="tk.Button" id="btnDelete">
+                <property name="command" type="command" cbtype="simple">delete</property>
+                <property name="text" translatable="yes">Delete</property>
+                <property name="width">5</property>
+                <layout manager="pack">
+                  <property name="anchor">s</property>
+                  <property name="pady">20</property>
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Button" id="btnQuit">
+                <property name="command" type="command" cbtype="simple">quit</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">Quit</property>
                 <property name="width">5</property>
                 <layout manager="pack">
                   <property name="propagate">True</property>
-                  <property name="side">top</property>
+                  <property name="side">bottom</property>
                 </layout>
               </object>
             </child>
