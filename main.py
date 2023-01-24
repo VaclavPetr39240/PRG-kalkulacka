@@ -1,9 +1,22 @@
 #!/usr/bin/env python3
 
 import tkinter as tk
+import operator
 
 # from tkinter import ttk
 
+def plus(a, b):
+    return a + b
+opr = {
+    '+': plus,
+    '-': lambda a,b: a-b,
+    '*': lambda a,b: a*b,
+    '/': operator.truediv,
+    '//': lambda a,b: a//b,
+    '**': lambda a,b: a**b,
+    '%': lambda a,b: a%b,
+    
+}
 
 class MyEntry(tk.Entry):
     def __init__(self, master=None, cnf={}, **kw):
@@ -40,9 +53,30 @@ class Application(tk.Tk):
         self.entry.bind("<Return>", self.process)
         self.entry.bind("<KP_Enter>", self.process)
 
+        self.listbox.bind("<ButtonRelease-1>", self.onclick)
+
+    def onclick(self, event: tk.Event):
+        print(self.listbox.get('anchor'))
+
     def process(self, e: tk.Event):
-        print(self.entry.value)
+        line = self.entry.value
+        for token in line.split():
+            self.line_process(token)
         self.entry.value = ""
+
+    def line_process(self, token:str):
+        try:
+            token = token.replace(',', '.')
+            number = float(token)
+            self.listbox.insert(0, number)
+        except ValueError:
+            if token in opr:
+                a = self.listbox.get(0)
+                self.listbox.delete(0)
+                b = self.listbox.get(0)
+                self.listbox.delete(0)
+                self.listbox.insert(0, opr[token](a, b))
+            pass
 
     def quit(self, event=None):
         super().quit()
